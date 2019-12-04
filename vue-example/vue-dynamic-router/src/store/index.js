@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router"
+import { Loading } from 'element-ui'
 
 Vue.use(Vuex);
 
@@ -27,8 +28,8 @@ export default new Vuex.Store({
     token: window.sessionStorage.getItem("username")
   },
   mutations: {
-    changeLoading(state) {
-      state.isLoading = !state.isLoading
+    changeLoading(state, l) {
+      state.isLoading = l
     },
     setUsername(state, value) {
       state.username = value
@@ -38,17 +39,22 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    changeLoadingSync({ commit }) {
-      commit("changeLoading")
-    },
     LoginSync({ commit }, username) {
-      commit("setUsername", username)
-      commit("setToken", "token")
-      window.sessionStorage.setItem("username", "user")
-      window.sessionStorage.setItem("token", "token")
+      const load = Loading.service({
+        text: "加载中"
+      })
 
-      var path = router.history.current.query.redirect || "/home"
-      router.push(path)
+      setTimeout(function() {
+        commit("setUsername", username)
+        commit("setToken", "token")
+        window.sessionStorage.setItem("username", "user")
+        window.sessionStorage.setItem("token", "token")
+
+        load.close()
+
+        var path = router.history.current.query.redirect || "/home"
+        router.push(path)
+      }, 1000)
     },
     logout({ commit }) {
       commit("setUsername", "")
