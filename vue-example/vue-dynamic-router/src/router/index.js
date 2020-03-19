@@ -26,6 +26,13 @@ const routes = [
         meta: {
           auth: true
         }
+      },
+      {
+        path: "echarts",
+        component: () => import("../views/Echarts.vue"),
+        meta: {
+          auth: true
+        }
       }
     ]
   },
