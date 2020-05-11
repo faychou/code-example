@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片上传</title>
+    <style>
+      form {
+        text-align: center;
+        border: 1px dashed #333;
+        margin: 20px;
+        padding: 20px;
+      }
+      form img {
+        width: 200px;
+        height: auto;
+      }
+    </style>
+	</head>
+	<body>
+    <form>
+      <div>
+        <input type="file" id="fileBase64" />
+        <img src="" alt="" id="fileView">
+      </div>
+      <div>
+        <button type="button" id="btnBase64">上传 base64</button>
+      </div>
+    </form>
+    
+    <form id="fileFormData">
+      <div>
+        <input type="file" name="fileData">
+      </div>
+      <div>
+        <button type="button" id="btnForm">上传表单</button>
+      </div>
+    </form>
+    
+    <form id="fileFormClient">
+      <div>
+        <input type="file" id="fileClient" name="fileClient">
+      </div>
+      <div>
+        <button type="button" id="btnClient">客户端直接上传</button>
+      </div>
+    </form>
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://unpkg.com/qiniu-js@2.5.5/dist/qiniu.min.js"></script>
+    <script>
+      /* --------------------------------- 前端上传 base64 到服务器 ----------------------------------*/
+      var imgBase64;
+      viewAvator(); // 头像预览
+      function viewAvator() {
+        $("#fileBase64").change(function() {
+          if (this.files && this.files[0]) {
+            var reader = new FileReader();            
+            reader.readAsDataURL(this.files[0]);
+      
+            reader.onload = function (e) {
+              $('#fileView').attr('src', reader.result);
+              imgBase64 = reader.result;
+            }
+          }
+        });
+      }
+      
+      $('#btnBase64').on('click', function() {
+        $.ajax({
+          url: 'http://127.0.0.1:3000/qiniu/upload-base64',
+          method: 'POST',
+          data: {
+            imgBase64
+          },
+        })
+        .done(function(res) {
+           console.log(res)
+        })
+        .fail(function(err) {
+          console.log(err)
+        });
+      });
+      
+      /* --------------------------------- 前端以 form-data 上传图片到服务器 ----------------------------------*/
+      $('#btnForm').on('click', function() {
+        var fileForm = $('#fileFormData').get(0);
+        let formData = new FormData(fileForm); // 把已有的 form 作为参数，后台req.file 获取
+        formData.append('username', 'fay');
+        
+        $.ajax({
+          url: 'http://127.0.0.1:3000/qiniu/upload-formdata',
+          method: 'POST',
+          data: formData,
+          mimeType: "multipart/form-data", 
+          processData : false, // 不去处理发送的数据
+          contentType : false // 不去设置 Content-Type 请求头
+        })
+        .done(function(res) {
+           console.log(res)
+        })
+        .fail(function(err) {
+          console.log(err)
+        })
+      });
+      
+      /* ------------------------------------ 本地直接上传 base64 到七牛云 ----------------------------------*/
+      // 首先从服务器拿取 uploadToken
+      let uploadToken,
+        qiniuUrl,
+        base64Data;
+        
+      const config = { // 上传配置
+        useCdnDomain: true, // 使用 cdn 加速
+      };
+      const putExtra = { // 额外配置，如限制上传文件的类型
+        mimeType: ['image/png', 'image/jpeg', 'image/gif'],
+      };
+      
+      $.ajax({
+        url: 'http://127.0.0.1:3000/qiniu/getUploadToken',
+        method: 'GET'
+      })
+      .done(function(res) {
+         console.log(res)
+         uploadToken = res.uploadToken;
+         qiniuUrl = res.qiniuUrl;
+      })
+      .fail(function(err) {
+        console.log(err)
+      });
+      
+      $('#btnClient').on('click', function() {
+        const file = $('#fileClient').get(0).files[0];
+        const key = Date.now() + '.png';
+        
+        const observable = qiniu.upload(file, key, uploadToken, putExtra, config)
+        observable.subscribe({ // 用来设置上传过程的监听函数
+          next: (res) => { // res 包含 loaded、total、percent 三个属性，提供上传进度信息
+            console.log(res);
+          },
+          error: (err) => {
+            console.log('上传图片失败', err);
+          },
+          complete: (res) => { // 接收上传完成后的后端返回信息
+            console.log(res);
+            console.log('图片地址：', qiniuUrl + '/' + res.key);
+          },
+        });
+      });
+    </script>
+	</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-cn"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>头像上传</title>
+  <style>
+    .box {
+      width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    .box img {
+      max-width: 100%;
+    }
+
+    #multiImg img {
+      width: 290px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <form id="avatorForm" name="avatorForm" enctype="multipart/form-data" >
+      <input type="file" id="avator" name="avator" accept="image/*">
+      <button type="button" id="avatorBtn">上传头像</button>
+    </form>
+  
+    <img src="" alt="" id="avatorImg">
+  </div>
+
+  <div class="box">
+    <form id="multiForm" name="multiForm" >
+      <input type="file" id="multi" name="multi" accept="image/*" multiple>
+      <button type="button" id="multiBtn">多图上传</button>
+    </form>
+  
+    <div id="multiImg"></div>
+  </div>
+
+  <script src="/js/jquery.min.js"></script>
+  <script>
+    viewAvator(); // 头像预览
+    function viewAvator() {
+      $("#avator").change(function() {
+        console.log('上传头像信息：', this.files);
+        if (this.files && this.files[0]) {
+          var reader = new FileReader(); // 异步读取文件的 api
+          reader.readAsDataURL(this.files[0]); // 指定读取的对象，只能是 file 或 blob 对象
+
+          reader.onload = function (e) { // 读取完毕后 result 属性会返回 base64 编码的字符串以表示所读取的内容
+            $('#avatorImg').attr('src', reader.result);
+          }
+        }
+      })
+    }
+
+    viewMulti() // 多图预览
+    function viewMulti() {
+      $("#multi").change(function() {
+        console.log('上传多图信息：', this.files);
+        if (this.files && this.files.length > 0) {
+          for(var i =0; i < this.files.length; i++) {
+            let reader = new FileReader(); 
+            reader.readAsDataURL(this.files[i]);
+
+            reader.onload = function (e) {
+              $('#multiImg').append(`<img src=${reader.result} />`);
+            }
+          }
+        }
+      })
+    }
+
+    // 头像上传
+    $('#avatorBtn').on('click', function() {
+      var avator = $('#avator').get(0);
+      console.log(avator.files);
+      if(avator.files.size > 2 * 1024 * 1024) { 
+        alert("上传图片过大，请保持在2M内") 
+      } else {
+        uploadAvator(); //上传
+      } 
+    });
+
+    function uploadAvator() {
+      var file = $('#avator').get(0).files[0];
+      var avatorForm = $('#avatorForm').get(0);
+      let formData = new FormData(avatorForm); // 把已有的 form 作为参数，后台req.file 获取
+      formData.append('username', 'avator'); // 继续添加，后台 req.body 获取
+      console.log(formData);
+
+      $.ajax({
+        method: 'POST',
+        url: '/upload/avator',
+        data: formData,
+        mimeType: "multipart/form-data",
+        processData : false, // 不去处理发送的数据
+        contentType : false // 不去设置 Content-Type 请求头
+      })
+      .done(function(data) {
+        console.log(data);
+      })
+      .fail(function(err) {
+        console.log(err);
+      });
+    }
+
+    // 多图上传
+    $('#multiBtn').on('click', function() {
+      var multi = $('#multi').get(0);
+      console.log(multi.files);
+
+      var multiForm = $('#multiForm').get(0);
+      var formData = new FormData(multiForm);
+      formData.append('username', 'multiList'); // 继续添加
+      console.log(formData);
+
+      $.ajax({
+        method: 'POST',
+        url: '/upload/multi',
+        data: formData,
+        mimeType: "multipart/form-data",
+        // 不去处理发送的数据
+        processData : false, 
+        // 不去设置 Content-Type 请求头
+        contentType : false
+      })
+      .done(function(data) {
+        console.log(data);
+      })
+      .fail(function(err) {
+        console.log(err);
+      });
+    });
+
+  </script>
+</body>
+</html>
