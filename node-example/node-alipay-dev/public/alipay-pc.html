@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>PC端网页支付demo</title>
+	</head>
+	<body>
+    <button id="orderBtn">下单</button>
+    
+    <button id="payBtn">支付</button>
+    
+    <button id="getPayBtn">支付状态查询</button>
+    
+    <script src="/js/jquery.min.js"></script>
+    <script>
+      var outTradeNo;
+      
+      // 下单
+      $('#orderBtn').on('click', function() {
+        $.ajax({
+          method: 'POST',
+          url: '/order/create',
+          data: {
+            userId: 101,
+            totalPrice: 1
+          }
+        })
+        .done(function(res) {
+          console.log(res);
+          outTradeNo = res.outTradeNo
+        })
+        .fail(function(err) {
+          console.log(err);
+        });
+      });
+      
+      // 支付
+      $('#payBtn').on('click', function() {
+        $.ajax({
+          method: 'POST',
+          url: '/alipay/pcpay',
+          data: {
+            outTradeNo
+          }
+        })
+        .done(function(res) {
+          console.log(res);
+          // window.location.href = res.url;
+          window.open(res.url, '_blank');
+        })
+        .fail(function(err) {
+          console.log(err);
+        });
+      });
+      
+      // 查看订单支付状态
+      $('#getPayBtn').on('click', function() {
+        $.ajax({
+          method: 'GET',
+          url: '/alipay/query',
+          data: {
+            outTradeNo
+          }
+        })
+        .done(function(res) {
+          console.log(res);
+        })
+        .fail(function(err) {
+          console.log(err);
+        });
+      });
+    </script>
+	</body>
+</html>
