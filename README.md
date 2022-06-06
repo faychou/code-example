@@ -17,4 +17,4 @@
   * [小程序 cms 模板](/tree/master/wx-example/wx-cms-template)
 
 ### Webpack 案例
-  * [webpack 配置 React 开发环境进阶](/tree/master/webpack-v2-advanced)
+  * [webpack 配置 React 开发环境进阶](https://github.com/faychou/code-example/tree/master/webpack-v2-advanced)
