@@ -1,0 +1,8 @@
+<view class="wrap">
+  <view class="btn {{type=='income' ? 'on' : ''}}" data-type="income" bindtap="changeType">收入</view>
+  <view class="btn {{type=='outcome' ? 'on' : ''}}" data-type="outcome" bindtap="changeType">支出</view>
+</view>
+
+<view class="my-chart">
+  <ec-canvas id="lazy-mychart-dom" canvas-id="lazy-mychart" ec="{{lazyEc}}"></ec-canvas>
+</view>

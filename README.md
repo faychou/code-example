@@ -15,6 +15,7 @@
 
 ### 小程序案例
   * [小程序 cms 模板](https://github.com/faychou/code-example/tree/master/wx-example/wx-cms-template)
+  * [小程序引入echarts](https://github.com/faychou/code-example/tree/master/wx-example/wx-mycharts)
 
 ### Webpack 案例
   * [webpack 配置 React 开发环境进阶](https://github.com/faychou/code-example/tree/master/webpack-v2-advanced)
