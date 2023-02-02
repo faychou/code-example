@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="note-list">
+    <view class="note-item" wx:for="{{noteList}}" wx:key="id">
+      <navigator url="{{'/pages/detail/detail?id=' + item.id}}">
+        <view class="note-item-title">{{item.title}}</view>
+        <view class="note-item-date">{{item.time}}</view>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="note-add">
+    <navigator url="/pages/add/add">
+      <image class="add-img" src="../../images/add-0c89e6.png" mode="aspectFit"></image>
+    </navigator>
+  </view>
+</view>

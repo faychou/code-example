@@ -19,3 +19,6 @@
 
 ### Webpack 案例
   * [webpack 配置 React 开发环境进阶](https://github.com/faychou/code-example/tree/master/webpack-v2-advanced)
+
+### Canvas 案例
+  * [粒子动画](https://github.com/faychou/code-example/tree/master/canvas-example/new-year-lizi)

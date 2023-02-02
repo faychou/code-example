@@ -1,0 +1,36 @@
+/* pages/detail/detail.wxss */
+.note {
+  padding: 20px 20px 100px;
+}
+.note-title {
+  font-size: 18px;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+.note-time {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+}
+.note-body {
+  padding-top: 10px;
+}
+
+.note-foot {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.note-foot-item {
+  width: 60px;
+}
+.foot-img {
+  width: 30px;
+  height: 30px;
+}

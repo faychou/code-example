@@ -1,0 +1,20 @@
+/* pages/add/add.wxss */
+.group {
+  padding: 10px 20px 0;
+}
+
+.tool {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  height: 30px;
+  background-color: #fff;
+}
+.confirm-img {
+  width: 30px;
+  height: 30px;
+  float: right;
+  padding-right: 20px;
+}

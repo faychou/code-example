@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.todo-app {
+  width: 300px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.todo-input {
+  display: flex;
+  margin-top: 20px;
+}
+.todo-input input {
+  flex: 1;
+  outline: none;
+  padding: 2px 5px;
+}
+.todo-input button {
+  width: 80px;
+  height: 30px;
+}
+
+.todo-list {
+  margin-top: 20px;
+}
+.todo-list li {
+  text-align: left;
+}
