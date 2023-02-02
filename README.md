@@ -14,8 +14,9 @@
   * [Vue 移动端适配](https://github.com/faychou/code-example/tree/master/vue-example/vue-mobile-adapter)
 
 ### 小程序案例
-  * [小程序 cms 模板](https://github.com/faychou/code-example/tree/master/wx-example/wx-cms-template)
-  * [小程序引入echarts](https://github.com/faychou/code-example/tree/master/wx-example/wx-mycharts)
+  * [小程序引入 echarts](https://github.com/faychou/code-example/tree/master/wx-example/wx-mycharts)
+  * [小程序云开发基础](https://github.com/faychou/code-example/tree/master/wx-example/wx-cloud-note)
+  * [小程序云开发 cms 模板](https://github.com/faychou/code-example/tree/master/wx-example/wx-cms-template)
 
 ### Webpack 案例
   * [webpack 配置 React 开发环境进阶](https://github.com/faychou/code-example/tree/master/webpack-v2-advanced)
