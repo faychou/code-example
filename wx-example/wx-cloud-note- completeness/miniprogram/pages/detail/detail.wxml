@@ -1,0 +1,22 @@
+<view class="note">
+  <view class="note-title">{{note.title}}</view>
+  
+  <!-- <view class="note-category">{{note.cid}}</view> -->
+  <!-- 聚合改造后 -->
+  <view class="note-category">{{note.category[0]['name']}}</view>
+
+  <view class="note-time">{{note.time}}</view>
+  <view class="note-body">{{note.body}}</view>
+</view>
+
+<view class="note-foot">
+  <navigator url="../edit/edit?id={{note._id}}" class="note-foot-item">
+    <image class="foot-img" mode="aspectFit" src="/images/edit.png"></image>
+    <view>编辑</view>
+  </navigator>
+
+  <view class="note-foot-item" bindtap="delHandler">
+    <image class="foot-img" mode="aspectFit" src="/images/del.png"></image>
+    <view>删除</view>
+  </view>
+</view>

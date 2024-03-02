@@ -1,0 +1,5 @@
+<view class="category">
+  <navigator wx:for="{{cList}}" wx:key="_id" url="../categorylist/categorylist?cid={{item._id}}" class="category-item">
+    {{item.name}}
+  </navigator>
+</view>

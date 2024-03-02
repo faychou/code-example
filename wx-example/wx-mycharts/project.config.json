@@ -41,7 +41,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.4",
-  "appid": "wx06d15cd24ca9015a",
+  "appid": "填写自己的appid",
   "projectname": "%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%95%E5%85%A5Echarts%E7%A4%BA%E4%BE%8B",
   "debugOptions": {
     "hidedInDevtools": []

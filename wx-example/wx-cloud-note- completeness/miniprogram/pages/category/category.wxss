@@ -1,0 +1,16 @@
+.category {
+  display: flex;
+  padding: 20rpx;
+  flex-wrap: wrap;
+}
+.category-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 291rpx;
+  height: 291rpx;
+  padding: 20rpx;
+  border: 2rpx solid #ccc;
+  font-size: 24px;
+  font-weight: 600;
+}

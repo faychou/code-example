@@ -1,0 +1,23 @@
+page {
+  background: #f6f6f6;
+}
+
+/* 列表 */
+.note-list {
+  padding: 20px;
+}
+.note-item {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.note-item-title {
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+.note-item-date {
+  font-size: 14px;
+  font-weight: 400;
+}

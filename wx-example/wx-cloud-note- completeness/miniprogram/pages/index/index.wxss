@@ -1,0 +1,40 @@
+/**index.wxss**/
+
+page {
+  background: #f6f6f6;
+}
+
+/* 列表 */
+.note-list {
+  padding: 20px;
+}
+.note-item {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.note-item-title {
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+.note-item-date {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* 添加 */
+.note-add {
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+  width: 100rpx;
+  height: 100rpx;
+  box-shadow: 0 0 10px #0c89e6;
+  border-radius: 50%;
+}
+.add-img {
+  width: 100rpx;
+  height: 100rpx;
+}

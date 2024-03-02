@@ -1,0 +1,20 @@
+<view class="group">
+  <input class="note-title" focus placeholder="标题" model:value="{{title}}" />
+</view>
+
+<view class="group clist">
+  <view class="picker_title">分类选择</view>
+  <picker bindchange="bindPickerChange" range-key="name" value="{{cIndex}}" range="{{cList}}" class="picker_body">
+    <view class="picker">
+    {{cList[cIndex]['name']}}
+    </view>
+  </picker>
+</view>
+
+<view class="group">
+  <textarea placeholder="内容" maxlength="-1" model:value="{{body}}" />
+</view>
+
+<view class="tool">
+  <image mode="aspectFit" src="/images/confirm.png" class="confirm-img" bindtap="submitNote"></image>
+</view>
