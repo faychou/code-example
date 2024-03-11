@@ -15,7 +15,7 @@
 
 ### 小程序案例
   * [小程序引入 echarts](https://github.com/faychou/code-example/tree/master/wx-example/wx-mycharts)
-  * [小程序云开发基础](https://github.com/faychou/code-example/tree/master/wx-example/wx-cloud-note)
+  * [小程序云开发入门](https://github.com/faychou/code-example/tree/master/wx-example/wx-cloud-note-completeness)
   * [小程序云开发 cms 模板](https://github.com/faychou/code-example/tree/master/wx-example/wx-cms-template)
 
 ### Webpack 案例
