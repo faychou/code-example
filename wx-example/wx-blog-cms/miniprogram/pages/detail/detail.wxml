@@ -1,0 +1,11 @@
+<view class="detail-title">
+  {{detailData.title}}
+</view>
+
+<view class="detail-time">
+  {{detailData.formateTime}}
+</view>
+
+<view class="detail-content">
+  <editor id="editor" read-only bindready="onEditorReady"></editor>
+</view>

@@ -1,0 +1,9 @@
+<view class="index-title">
+  飞舟的博客
+</view>
+
+<view class="index-list">
+  <navigator class="list-item" url="/pages/detail/detail?articleid={{item._id}}" wx:for="{{listData}}" wx:key="index">
+    {{item.title}}
+  </navigator>
+</view>
